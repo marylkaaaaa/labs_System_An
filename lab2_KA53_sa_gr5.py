@@ -61,9 +61,33 @@ y4 = norming(y4)
 y5 = norming(y5)
 
 
+def polinom_chebysheva(x, n):
+    t = []
+    t.append(1)
+    if n == 0:
+        return t
+    else:
+        t.append(-1+2*x)
+        if n > 1:
+            for i in range(2, n+1):
+                t_temp = 2*(-1+2*x)*t[i-1] - t[i-2]
+                t.append(t_temp)
+    return t
 
 
+# not working function
 
-
-
-print(x11)
+# def method_least_squares(X, y, p_i, q_i):
+#     """ Realises method of least squares tetta = (X^T*X)^-1 * X^T * Y
+#
+#     X -- matrix [1, y(k-1), y(k-2), y(k-3), v(k), v(k-1), v(k-2), v(k-3)] (mod for p, q)
+#     y -- vector y(k)
+#     p_i -- order of autoregression
+#     q_i -- order of the moving element
+#
+#     return: vector of predicted parametrs tetta = (a0, a1, a2, a3, b0, b1, b2, b3)
+#
+#     """
+#
+#     y = y[max(p_i, q_i):]
+#     return np.linalg.pinv(X.T @ X) @ X.T @ y
